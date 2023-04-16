@@ -1,30 +1,36 @@
 from Crypto.Cipher import DES3
-import binascii
+from Crypto.Random import get_random_bytes
+import base64
 
-# Funksioni për të enkriptuar tekstin me 3DES
 def encrypt3DES(plaintext, key):
-    # Konvertojmë çelësin në formën e duhur
-    keyHex = key.encode('utf-8').ljust(24, b'\0')
-    key1 = keyHex[:8]
-    key2 = keyHex[8:16]
-    key3 = keyHex[16:]
+    # Shtimi i padding në tekstin e pastër nëse gjatësia nuk është e plotë me 8 bajtë
+    plaintext = pad(plaintext)
 
-    # Përgatitim i ndihmës për padding të tekstit
-    plaintextPadded = plaintext.encode('utf-8')
-    paddingSize = 8 - (len(plaintextPadded) % 8)
-    plaintextPadded += bytes([paddingSize] * paddingSize)
+    # Krijimi i një objekti 3DES cipher
+    cipher = DES3.new(key, DES3.MODE_ECB)
 
-    # Enkriptimi i tekstit
-    ciphertext = b''
-    cipher = DES3.new(key1, DES3.MODE_ECB)
-    for i in range(0, len(plaintextPadded), 8):
-        block = plaintextPadded[i:i+8]
-        ciphertext += cipher.encrypt(block)
+    # Enkriptimi i tekstit të pastër
+    ciphertext = cipher.encrypt(plaintext)
 
-    return binascii.hexlify(ciphertext).decode('utf-8')
+    # Kthimi i tekstit të enkriptuar në format base64
+    return base64.b64encode(ciphertext).decode('utf-8')
 
-plaintext = "Teksti që duam të enkriptojmë"
-key = "Celesi per 3DES".ljust(24)
-ciphertext = encrypt3DES(plaintext, key)
+def pad(text):
+    # Shtimi i padding në tekstin e pastër
+    while len(text) % 8 != 0:
+        text += b'\x00'
+    return text
+
+# Gjenerimi i një kyçi të rastësishëm me gjatësi 24 bajtë (192 bitë)
+key = get_random_bytes(24)
+
+# Teksti i pastër që do të enkriptohet
+plaintext = "Ky eshte nje tekst per enkriptim me 3DES"
+
+# Enkriptimi i tekstit të pastër
+ciphertext = encrypt3DES(plaintext.encode('utf-8'), key)
+
+# Printimi i tekstit të enkriptuar
 print("Teksti i enkriptuar:", ciphertext)
+
 
