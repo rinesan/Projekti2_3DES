@@ -8,3 +8,9 @@ while True:
         break
         file_path=input('filepath:')
         key = input('tdes key:')
+        key_hash = md5(key.encode('ascii')).digest()
+        tdes_key = DES3.adjust_key_parity(key_hash)
+        cipher = DES3.new(tdes_key, DES3.MODE_EAX, nonce=b'0')
+
+        with open(file_path), 'rb') as input_file:
+            file_bytes = input_file.read()
