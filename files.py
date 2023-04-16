@@ -35,6 +35,8 @@ def encrypt_file(input_file_path, output_file_path, key):
      encrypted_bytes = input_file.read()
      print(f"Encrypted file: {encrypted_bytes}")
 
+
+
     # Decrypt the file bytes
     cipher.nonce = nonce
     decrypted_bytes = cipher.decrypt(encrypted_bytes)
@@ -45,5 +47,9 @@ def encrypt_file(input_file_path, output_file_path, key):
     with open(output_file_path, 'wb') as output_file:
         output_file.write(decrypted_bytes)
     print(f"Decryption successful. Output file written to {output_file_path}")
+
+
+input_file_path = 'input.txt'
+encrypted_file_path = 'encrypted.txt'
 
 
