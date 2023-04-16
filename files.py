@@ -1,4 +1,3 @@
-
 import hashlib
 from Crypto.Cipher import DES3
 def encrypt_file(input_file_path, output_file_path, key):
