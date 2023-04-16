@@ -8,9 +8,12 @@ def encrypt_file(input_file_path, output_file_path, key):
 
     cipher = DES3.new(tdes_key, DES3.MODE_EAX, nonce=b'0')
 
-     with open(input_file_path, 'rb') as input_file:
+    with open(input_file_path, 'rb') as input_file:
          file_bytes = input_file.read()
          print(f"input file: {file_bytes}")
+
+    encrypted_bytes = cipher.encrypt(file_bytes)
+    print(f"Encrypted file: {encrypted_bytes}")
 
 
 
