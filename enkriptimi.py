@@ -21,7 +21,7 @@ def pad(text):
         text += b'\x00'
     return text
 
-# Gjenerimi i një kyçi të rastësishëm me gjatësi 24 bajtë (192 bitë)
+# Gjenerimi i një qelsi të rastësishëm me gjatësi 24 bajtë (192 bitë)
 key = get_random_bytes(24)
 
 # Teksti i pastër që do të enkriptohet
