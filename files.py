@@ -14,3 +14,13 @@ while True:
 
         with open(file_path), 'rb') as input_file:
             file_bytes = input_file.read()
+
+        if operation== '1':
+            #Encrypt
+            new_file_bytes = cipher.encrypt(file_bytes)
+        else:
+            #Decrypt
+         new_file_bytes = cipher.decrypt(file_bytes)
+         with open(file_path, 'wb') as output file:
+             output_file.write(new_file_bytes)
+
