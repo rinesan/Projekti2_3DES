@@ -35,6 +35,13 @@ def encrypt_file(input_file_path, output_file_path, key):
         nonce = input_file.read(DES3.block_size)
         encrypted_bytes = input_file.read()
         print(f"Encrypted file: {encrypted_bytes}")
-
+    # Decrypt the file bytes
+    cipher.nonce = nonce
+    decrypted_bytes = cipher.decrypt(encrypted_bytes)
+    print(f"Decrypted file: {decrypted_bytes}")
+    # Write the decrypted bytes to the output file
+    with open(output_file_path, 'wb') as output_file:
+        output_file.write(decrypted_bytes)
+    print(f"Decryption successful. Output file written to {output_file_path}")
 
 
