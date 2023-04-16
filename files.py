@@ -20,7 +20,12 @@ def encrypt_file(input_file_path, output_file_path, key):
         output_file.write(encrypted_bytes)
 
     print(f"Encryption successful. Output file written to {output_file_path}")
-
+    def decrypt_file(input_file_path, output_file_path, key):
+    # Compute the 3DES key from the user-supplied key
+    key_hash = hashlib.md5(key.encode('ascii')).digest()
+    tdes_key = DES3.adjust_key_parity(key_hash)
+    # Create a new 3DES cipher object in EAX mode
+    cipher = DES3.new(tdes_key, DES3.MODE_EAX)
 
 
 
