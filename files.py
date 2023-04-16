@@ -15,6 +15,12 @@ def encrypt_file(input_file_path, output_file_path, key):
     encrypted_bytes = cipher.encrypt(file_bytes)
     print(f"Encrypted file: {encrypted_bytes}")
 
+    with open(output_file_path, 'wb') as output_file:
+        output_file.write(cipher.nonce)
+        output_file.write(encrypted_bytes)
+
+    print(f"Encryption successful. Output file written to {output_file_path}")
+
 
 
 
