@@ -52,4 +52,7 @@ def encrypt_file(input_file_path, output_file_path, key):
 input_file_path = 'input.txt'
 encrypted_file_path = 'encrypted.txt'
 
+decrypted_file_path = 'decrypted.txt'
+key = 'secret'
+
 
