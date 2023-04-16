@@ -34,3 +34,7 @@ ciphertext = encrypt3DES(plaintext.encode('utf-8'), key)
 print("Teksti i enkriptuar:", ciphertext)
 
 
+
+
+
+
