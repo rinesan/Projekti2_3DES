@@ -55,4 +55,6 @@ encrypted_file_path = 'encrypted.txt'
 decrypted_file_path = 'decrypted.txt'
 key = 'secret'
 
+encrypt_file(input_file_path, encrypted_file_path, key)
+
 
